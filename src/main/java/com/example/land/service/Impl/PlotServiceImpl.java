@@ -18,10 +18,6 @@ public class PlotServiceImpl implements PlotService {
         return plotRepository.findAll();
     }
 
-    @Override
-    public List<Plot> getAllPlot() {
-        return (List<Plot>) plotRepository.getAllPlot();
-    }
 
     @Override
     public Plot getPlot(Long id) {
@@ -51,5 +47,15 @@ public class PlotServiceImpl implements PlotService {
     public Boolean deletePlot(Long id) {
         plotRepository.deleteById(id);
         return true;
+    }
+
+    @Override
+    public List<Plot> searchPlot(String string) {
+        return plotRepository.searchPlot(string);
+    }
+
+    @Override
+    public List<Plot> sortDesc() {
+        return plotRepository.sortPricePlot();
     }
 }

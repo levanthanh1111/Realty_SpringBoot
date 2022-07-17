@@ -24,7 +24,7 @@ public class PlotController {
 
     @GetMapping("")
     public List<PlotDTO> getAll(){
-        return plotService.getAllPlot().stream().map(plot ->modelMapper.map(plot, PlotDTO.class))
+        return plotService.getAll().stream().map(plot ->modelMapper.map(plot, PlotDTO.class))
                 .collect(Collectors.toList());
     }
 
@@ -33,6 +33,21 @@ public class PlotController {
         Plot plot = plotService.getPlot(id);
         PlotDTO plotDTO = modelMapper.map(plot,PlotDTO.class);
         return ResponseEntity.ok().body(plotDTO);
+    }
+
+    @GetMapping("/search")
+    public List<PlotDTO> getSearch(@RequestParam("string") String string){
+        return plotService.searchPlot(string).stream().map(plot -> modelMapper.map(plot, PlotDTO.class))
+                .collect(Collectors.toList());
+    }
+    /*public  ResponseEntity<List<Plot>> getSearch(@RequestParam("string") String string){
+        return ResponseEntity.ok(plotService.searchPlot(string));
+    }*/
+
+    @GetMapping("/sortprice")
+    public List<PlotDTO> sortDescPrice(){
+        return plotService.sortDesc().stream().map(plot -> modelMapper.map(plot, PlotDTO.class))
+                .collect(Collectors.toList());
     }
 
     @PostMapping("/create")
